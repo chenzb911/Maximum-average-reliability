@@ -1,0 +1,1009 @@
+% Single-file manuscript. Compile with pdfLaTeX (twice for cross-references).
+% To add authors, uncomment the AMS fields below, once for each author.
+\documentclass[11pt,reqno]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[letterpaper,margin=1.12in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Regularity of graphs with maximum average reliability},
+  pdfsubject={Extremal graph theory and all-terminal network reliability}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\newcommand{\AR}{\operatorname{AR}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\avo}{\mathcal D}
+\newcommand{\bd}{\partial}
+\newcommand{\PP}{\mathbb P}
+\setcounter{tocdepth}{1}
+
+\title[Maximum average reliability]{Regularity of graphs with maximum average reliability}
+% \author{Author name}
+% \address{Department, institution, city, country}
+% \email{Email address}
+\date{}
+\subjclass[2020]{Primary 05C35, 05C40; Secondary 05C80, 90B25}
+\keywords{Average reliability, all-terminal reliability, regular graph, edge cut}
+\begin{document}
+\begin{abstract}
+The average reliability of a graph is the integral, over the edge failure probability, of the probability that the surviving graph is connected. Brown, Kolokolnikov and Kooij conjectured that a regular graph maximizes average reliability among graphs of a given order and integer average degree. We prove that, for each fixed integer $d\ge3$ and all sufficiently large admissible orders $n$, every maximizer of average degree $d$ is $d$-regular. The result holds for simple graphs and for loopless multigraphs. We give an explicit threshold that also allows $d$ to grow with $n$. For fixed $d$ we determine the maximum up to an additive $o(n^{-1})$ and show that restricting to nonregular graphs decreases it by $1/(dn)+o(n^{-1})$. Every optimal nonregular graph then has precisely two vertices of degree different from $d$, one of degree $d-1$ and one of degree $d+1$.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+Let $G$ be a finite undirected graph. Suppose that each edge fails independently with probability $q$ and that all vertices remain operational. The \emph{all-terminal reliability} $R_G(q)$ is the probability that the surviving spanning subgraph is connected. Its integral $\AR(G)=\int_0^1 R_G(q)\,dq$ is the \emph{average reliability} of $G$. Brown, Cox and Ehrenborg~\cite{BCE} studied this quantity as a criterion for comparing graphs of a given order and size. A graph of maximum average reliability always exists, even when no graph maximizes $R_G(q)$ simultaneously for every $q$. A related problem asks which graphs maximize $R_G(q)$ for all sufficiently small positive $q$. Brand, Cohen, Haber and Barzel~\cite{BCHB} treat this problem for graphs of fixed cycle rank.
+
+Brown, Kolokolnikov and Kooij~\cite[Theorem~2.1]{BKK} gave a probabilistic interpretation of the integral. If the $m$ edges of a connected graph are removed in uniformly random order, the expected number of removals up to and including the first disconnection is $(m+1)\AR(G)$. They conjectured that, when the order $n$ and the integer average degree $d$ are prescribed, a $d$-regular graph attains the maximum. The following theorem establishes their conjecture for sufficiently large $n$ and shows that every maximizer in this range is regular.
+
+\begin{theorem}\label{thm:main}
+Let $d\ge3$ be an integer, let $nd$ be even, and put $T(d)=(100d)^{\max\{520,40d\}}$. If $n\ge T(d)$, there is a simple $d$-regular graph $H$ of order $n$ such that
+\begin{equation}\label{eq:gap}
+  \AR(H)-\AR(G)\ge \frac{e^{-3}}{8dn}
+\end{equation}
+for every nonregular loopless multigraph $G$ of order $n$ and size $nd/2$. For $d=3$, the strict inequality $\AR(H)>\AR(G)$ holds for some simple cubic $H$ at every even order $n\ge10^{33}$.
+\end{theorem}
+
+Thus every maximizer is regular whether the maximum is taken over simple graphs or over loopless multigraphs. The same simple graph $H$ suffices for both comparisons.
+\begin{corollary}\label{cor:uniform}
+For every fixed $0<c<1/40$ and all sufficiently large $n$, every maximizer of order $n$ and integer average degree $3\le d\le c\log n/\log\log n$ is regular, provided $nd$ is even.
+\end{corollary}
+\begin{proof}
+For $d\ge13$ one has $\log T(d)=40d\log(100d)\le(40c+o(1))\log n$ uniformly in the stated range. The remaining values $3\le d<13$ have bounded thresholds.
+\end{proof}
+
+Fix either of the two graph classes. Let $M_d(n)$ denote the maximum average reliability in that class at order $n$ and size $nd/2$, and let $M_d^{\mathrm{irr}}(n)$ denote the corresponding maximum over nonregular graphs. The next two theorems concern fixed $d$, with $n$ tending to infinity through orders for which $nd$ is even.
+\begin{theorem}\label{thm:exp}
+For each integer $d\ge3$,
+\begin{equation}\label{eq:exp}
+ M_d(n)=\Gamma(1+1/d)n^{-1/d}
+ -\tfrac12\Gamma(2-1/d)n^{-(d-1)/d}
+ +b_d n^{-1}+o_d(n^{-1}),
+\end{equation}
+where $b_3=3/4$ and $b_d=1$ for $d\ge4$.
+\end{theorem}
+Brown, Kolokolnikov and Kooij~\cite[Section~3.2]{BKK} obtained the first two terms in \eqref{eq:exp} from approximations that count isolated vertices and two-vertex components in regular graphs. Theorem~\ref{thm:exp} gives these terms for the extremal value and determines the coefficient of $n^{-1}$. This is the order at which one vertex of degree $d-1$ first affects the comparison.
+
+\begin{theorem}\label{thm:gap}
+For each fixed integer $d\ge3$,
+$M_d(n)-M_d^{\mathrm{irr}}(n)=1/(dn)+o_d(n^{-1})$.
+For all sufficiently large admissible $n$, every graph attaining $M_d^{\mathrm{irr}}(n)$ has one vertex of degree $d-1$, one of degree $d+1$, and all other vertices of degree $d$.
+\end{theorem}
+For completeness, the case $d=2$ has an exact answer. A connected graph of order and size $n$ has a unique cycle, say of length $s$, with $s=2$ allowed for parallel edges. The graph remains connected if no edge fails or if just one cycle edge fails. Its average reliability is therefore $(n+s)/(n(n+1))$. For $n\ge3$ the cycle $C_n$ is the unique maximizer, with value $2/(n+1)$.
+
+The scale of the comparison can be seen from the probability $q^d$ that a vertex of degree $d$ becomes isolated. Around $nq^d=1$, the factor from avoiding other isolated vertices is approximately $e^{-nq^d}$ in a suitable regular graph. Replacing one degree $d$ by $d-1$ adds a loss whose leading integral is $\int_0^\infty q^{d-1}e^{-nq^d}\,dq=1/(dn)$. To detect this loss uniformly over all competitors we estimate the probability of small components to an integrated error $o_d(n^{-1})$. When $d=3$, components on three vertices contribute at this precision.
+
+Section~\ref{sec:local} gives the conditional probability estimate used throughout. Sections~\ref{sec:upper} and~\ref{sec:lower} bound reliability from above for an arbitrary competitor and from below for a regular comparison graph. We integrate these bounds in Section~\ref{sec:extrema} and construct a nonregular graph attaining the leading term of the loss in Section~\ref{sec:defect}. The appendix proves the separate cubic threshold. Unless stated otherwise, degrees and edge boundaries count multiplicities and all graphs are loopless. A disconnected graph has average reliability zero.
+
+\section{Avoiding local events}\label{sec:local}
+Let $(A_i)_{i\in I}$ be a finite family of events in independent random coordinates. The \emph{support} of an event is a specified set of coordinates that determine it. Write $i\sim j$ for distinct indices with intersecting supports, and let $D$ be the largest number of neighbors of an index. Put $p_i=\Pr(A_i)$, $p_*=\max_i p_i$ and $\avo_T=\bigcap_{i\in T} A_i^c$ for $T\subseteq I$. All sums over neighboring pairs are unordered.
+
+\begin{lemma}\label{lem:void}
+Suppose $2p_*<1$ and $(1-2p_*)^{-D}\le2$. If the support of an event $F$ meets the supports of at most $K$ members of $T$, then
+\begin{equation}\label{eq:conditional}
+ \Pr(F\mid\avo_T)\le (1-2p_*)^{-K}\Pr(F).
+\end{equation}
+In particular,
+\begin{equation}\label{eq:void}
+ \log\Pr(\avo_I)\le-\sum_{i\in I}p_i+
+ (1-2p_*)^{-(2D+2)}\sum_{i\sim j}\Pr(A_i\cap A_j).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Induct on $|T|$ to show that $\Pr(A_i\mid\avo_T)\le 2p_*$ for $i\notin T$. Write $T=B\cup J$, where $J$ consists of the neighbors of $i$ in $T$. The event $A_i$ is independent of $\avo_B$. If $J$ is nonempty, the chain rule and the induction hypothesis give $\Pr(\avo_J\mid\avo_B)\ge(1-2p_*)^{|J|}$. Thus the required conditional probability is at most $p_i(1-2p_*)^{-D}\le2p_*$. If $J$ is empty it equals $p_i$. The same induction gives positivity of the avoidance probabilities. Splitting $T$ according to whether its members meet the support of $F$ proves \eqref{eq:conditional}.
+
+Order the indices. For each $i$ let $J$ be its earlier neighbors and $B$ the remaining earlier indices. The union bound gives
+\begin{align*}
+ \Pr(A_i\mid\avo_{B\cup J})
+ &\ge \Pr(A_i\cap\avo_J\mid\avo_B)\\
+ &\ge p_i-\sum_{j\in J}\Pr(A_i\cap A_j\mid\avo_B).
+\end{align*}
+The joint event in each term has a support meeting at most $2D+2$ members of the family. Apply \eqref{eq:conditional}, sum over $i$, and use $\log(1-x)\le-x$ in the chain rule for $\Pr(\avo_I)$.
+\end{proof}
+
+\section{A uniform upper bound}\label{sec:upper}
+
+Let $G$ be a connected loopless multigraph of order $n$ and size
+$m=nd/2$, where $d\ge3$ is an integer. Degrees and edge boundaries
+count parallel edges with their multiplicities. Write $n_j$ for the
+number of vertices of degree $j$, and put
+$L=\sum_{j<d}n_j$, $U(q)=\sum_{j<d}n_jq^j$, and $X=100d$.
+Since $G$ is connected and $n>1$, these sums may start at $j=1$.
+For $p=1-q$, define
+\begin{equation}\label{eq:phi}
+ \Phi(q)=-nq^d-mp q^{2d-2}+m q^{2d-1}
+          -\ind_{\{d=3\}}3np^2q^5.
+\end{equation}
+The last term accounts for three-vertex components in the cubic case.
+
+\begin{lemma}\label{lem:upper}
+Suppose that $n>10d+20$. With $A=X^{30}$, for
+$0<q\le X^{-30}$ one has
+\begin{equation}\label{eq:upper}
+ R_G(q)\le
+ \exp\bigl\{\Phi(q)+Anq^{2d}-U(q)/2\bigr\}.
+\end{equation}
+The term $U(q)/2$ may be replaced by
+$(1-100d^{11}q)U(q)$. In particular, its coefficient is
+$1-O_d(q)$ as $q\to0$.
+For $d=3$, the choices $A=10^5$ and $0<q\le10^{-10}$ also
+suffice in \eqref{eq:upper}; in this range its last term may be
+replaced by $-(1-10^6q)U(q)$.
+\end{lemma}
+
+\begin{proof}
+We apply Lemma~\ref{lem:void} to events that imply disconnection.
+Let $W=\{v:\deg v\le d\}$, and let $J$ be the underlying simple
+graph of $G[W]$. Thus $\Delta(J)\le d$. The total deficit
+$\sum_{j<d}(d-j)n_j$ equals the total excess above $d$ and is at
+most $(d-1)L$. Consequently, there are at most $(d-1)L$ vertices
+of degree above $d$, and their degree sum is at most
+$(d+1)(d-1)L$.
+
+For each $v\in W$, include the event $A_v$ that all edges incident
+with $v$ fail. Its probability is $q^{\deg v}$. We next identify
+the configurations that would give unusually large intersections
+between these events. Let $\mathcal P$ consist of every pair of
+degree-$d$ vertices joined by $k\ge2$ parallel edges and, when
+$d=3$, every set of three degree-three vertices spanning a triangle
+in $J$. Write $B=|\mathcal P|$ and $b_P=|\partial P|$.
+For a parallel pair, $b_P=2d-2k\le2d-4$; for a cubic triangle,
+$b_P\le3$. These boundaries are nonempty, since $G$ is connected
+and $n>3$.
+
+Mark every vertex of $J$ at distance at most six from a low-degree
+vertex, from a vertex of $W$ adjacent to a vertex of degree above
+$d$, or from a vertex in a member of $\mathcal P$. An unmarked
+vertex is called clean; it necessarily has degree $d$. A radius-six
+ball in $J$ has at most $2d^6$ vertices. There are at most
+$d^2L+3B$ marking seeds, so the number $M$ of marked vertices is
+at most $6d^8(L+B)$.
+
+For each edge with two clean endpoints, include the event that this
+edge survives and its endpoints form a component. Such an edge is
+simple, and the event has probability $pq^{2d-2}$. At most
+$7d^9(L+B)$ edges fail to have two clean endpoints: edges incident
+with vertices above degree $d$ number at most $d^2L$, and the
+remaining missing edges can be charged to the at most $dM$
+incidences at marked vertices. When $d=3$, also include the event
+that the vertices of a two-edge path on clean vertices form a
+component and both path edges survive. Such a path is induced,
+and its event has probability $p^2q^5$. Paths are counted up to
+reversal. Their number differs from $3n$ by at most
+$30d^{10}(L+B)$. Indeed, a clean vertex with three clean neighbors
+contributes three paths as their middle vertex. There are at most
+$4M+2L$ other possible centers in the cubic case, giving at most
+$12M+6L$ missing paths. We refer to the edge and path events as
+the ordinary component events.
+
+Process the members of $\mathcal P$ in increasing order of $b_P$,
+keeping a member unless a previously kept member is at distance
+at most six from it in $J$. A vertex belongs to at most $d^2$
+members of $\mathcal P$, so a kept member accounts for at most
+$1+6d^8\le7d^8$ members, including itself. For each kept $P$,
+adjoin all vertices $w\in W\setminus P$ whose neighbors belong
+to $P$, and denote the resulting set by $S$. This is already the
+full closure under adjoining vertices with all their neighbors in
+the current set. An adjoined vertex has no edge to any vertex
+still outside, so its addition cannot make another vertex
+eligible. In particular, $S$ lies within distance one of $P$.
+
+Each addition decreases the boundary by the positive degree of
+the added vertex. Thus $S$ is connected, has at most $|P|+b_P$
+vertices, and is a proper subset of $V(G)$ under the assumed bound
+on $n$. Choose a spanning tree of $G[S]$, and let $F_S$ be the
+event that its edges survive and all edges of $\partial S$ fail.
+Write $w_S=\Pr(F_S)$ and $V(q)=\sum_S w_S$. Since
+$|\partial S|\le b_P$ and $|S|-1\le5d$, we have
+$w_S\ge q^{b_P}/2$ throughout the stated ranges of $q$.
+The greedy choice therefore gives
+\begin{equation}\label{eq:upper-packing}
+ \sum_{P\in\mathcal P}q^{b_P}\le14d^8V(q).
+\end{equation}
+The coordinate sets of the events $F_S$ are pairwise disjoint and
+are disjoint from those of the ordinary component events. Indeed,
+a shared coordinate would place the corresponding shores at
+distance at most one in $J$, contradicting the separation or
+marking rule.
+
+Every event specifies at most $5d$ coordinates, and every
+coordinate occurs in at most $4d^2$ events. For the ordinary
+events, this follows by counting edges and two-edge paths through
+an endpoint of the coordinate; the selected witnesses add at most
+one occurrence. There are at most $10dn$ events in total.
+Consequently, their dependency degree is at most $D=20d^3$.
+Their probabilities are at most $q$, since each requires at least
+one edge to fail. The explicit conditional factor in
+Lemma~\ref{lem:void} is therefore bounded by
+$(1-2q)^{-(2D+2)}\le1+400d^3q$ in the polynomial range
+$q\le X^{-30}$.
+
+We now estimate the unordered sum of neighboring pair
+intersections in \eqref{eq:void}. For two intersecting stars, let
+$j$ be the smaller degree. If $j<d$, their union contains at least
+$j+1$ edges. Otherwise the two stars would coincide and their
+vertices would form a connected component of order two.
+Charging each pair to an endpoint of smaller degree bounds their
+total contribution by $dqU(q)$. Two degree-$d$ stars at a simple
+edge have joint probability $q^{2d-1}$, giving at most
+$mq^{2d-1}$ in total. At a parallel pair of multiplicity $k$, the
+joint probability is $q^{2d-k}=q^{b_P+k}$.
+
+A low-degree star does not meet an ordinary component event, by
+the marking rule. A star inside a witness shore $S$ is
+incompatible with $F_S$, since the chosen spanning tree survives.
+An outside star meeting $F_S$ needs at least one further failed
+edge, by the closure property of $S$. There are at most $2d$ such
+outside stars per witness. Their total contribution is at most
+$2dqV(q)$.
+
+It remains to consider ordinary component events and
+degree-$d$ stars, with star--star pairs already counted.
+Component events on distinct overlapping shores are incompatible,
+as is a star at a vertex of a component shore. For disjoint
+shores, the number of distinct required failed edges is the sum
+of the boundary sizes minus the number of edges between the
+shores. Edges joining these shores are simple, since an endpoint
+of an ordinary event cannot belong to a parallel regular pair.
+For $d\ge4$, a star and a two-vertex shore require at least
+$3d-4\ge2d$ failures, and two two-vertex shores require at least
+$4d-8\ge2d$ failures.
+
+For $d=3$, the boundary sizes are $3$, $4$, and $5$. A cubic vertex
+outside a clean edge has at most one edge entering it, and two
+disjoint clean edges have at most two edges between them;
+otherwise a cubic triangle would meet a clean vertex. A cubic
+vertex outside a clean path has at most two edges entering it,
+for the same reason. Four edges between a clean edge and a
+disjoint clean path would give a triangle-free graph with at least
+seven edges on five vertices, contrary to Mantel's theorem.
+Finally, the boundaries of two disjoint clean paths are distinct:
+in a connected graph equal edge boundaries have equal or
+complementary shores, and $n>6$. Their union thus contains at
+least six edges. Every compatible pair under consideration
+therefore requires at least $2d$ failures. The number of such
+pairs is at most $100d^4n$.
+
+Combining these estimates with \eqref{eq:upper-packing}, the
+unordered joint-probability sum is at most
+\begin{equation}\label{eq:upper-pairs}
+ mq^{2d-1}+100d^4nq^{2d}+dqU(q)+2dqV(q)
+       +\sum_{P\,\mathrm{parallel}}q^{b_P+k(P)}.
+\end{equation}
+The sum of the star probabilities is at least
+$nq^d+U(q)-dLq^d$. Subtracting the means of the ordinary events
+and the witnesses, and then applying \eqref{eq:void}, gives the
+claimed common terms in $\Phi$. We record the remaining
+estimates to make their dependence on $d$ explicit.
+
+The factor $1+400d^3q$ on the first term of
+\eqref{eq:upper-pairs} costs at most $200d^4nq^{2d}$; the
+remaining ordinary-pair contribution is at most
+$200d^4nq^{2d}$. These are bounded by $500d^4nq^{2d}$.
+Since $U(q)\ge Lq^{d-1}$, the missing regular-star means, the
+star pairs charged to low-degree vertices, and the missing
+ordinary means charged to $L$ together cost at most
+$100d^{11}qU(q)$.
+For a parallel pair $b_P\le2d-4$, and for a cubic triangle
+$b_P\le3<4=2d-2$. Thus the missing ordinary means charged to
+$B$ cost at most
+$(7d^9+30d^{10})q\sum_Pq^{b_P}$, where the path term is
+present only for $d=3$. The parallel-star terms cost at most
+$2q^2\sum_Pq^{b_P}$. Together with the witness--star terms,
+\eqref{eq:upper-packing} bounds all these costs by
+$600d^{18}qV(q)$. Hence
+\begin{equation}\label{eq:upper-preabsorb}
+ \log R_G(q)\le
+ \Phi(q)+500d^4nq^{2d}
+ -(1-100d^{11}q)U(q)
+ -(1-600d^{18}q)V(q).
+\end{equation}
+For $q\le X^{-30}$, both coefficients in parentheses in
+\eqref{eq:upper-preabsorb} are at least $1/2$, and
+$500d^4\le X^{30}$. Dropping the final
+negative term proves \eqref{eq:upper}, including its stronger
+coefficient on $U(q)$.
+
+For completeness, the same argument admits smaller numerical
+constants when $d=3$. A radius-six ball in $J$ contains at most
+$1+3(1+2+\cdots+2^5)=190$ vertices. The marking seeds number
+at most $9L+3B$, and each vertex belongs to at most four patterns.
+Thus $M\le1710L+570B$, and a kept pattern accounts for at most
+$3\cdot190\cdot4=2280$ patterns. The counterpart of
+\eqref{eq:upper-packing} is $\sum_Pq^{b_P}\le4560V(q)$.
+The missing edge events number at most
+$8L+3M\le5138L+1710B$, and the missing path events number at
+most $12M+6L\le20526L+6840B$.
+
+Each coordinate occurs in at most two stars, five edge events,
+eighteen path events, and one witness. Each event specifies at
+most eight coordinates. For a witness, adjoining a vertex
+decreases its boundary by at least one while increasing its
+spanning-tree size by one, so the number of coordinates does not
+increase under closure. We may therefore take $D=208$ and at
+most $7n$ events. For $q\le10^{-10}$, the conditional factor
+is at most $1+2000q$. The pair classification above bounds the
+ordinary remainder by $728nq^6$ before this factor is applied;
+the excess factor on $mq^5$ costs at most $3000nq^6$.
+Thus $10^5nq^6$ bounds the positive log remainder with room to
+spare. The displayed missing-event counts, the star deficit,
+and the low-degree star intersections cost less than
+$10^6qU(q)$. Using $\sum_Pq^{b_P}\le4560V(q)$, the
+pattern losses and the witness intersections cost less than
+$10^8qV(q)$. At $q\le10^{-10}$ the latter are absorbed by
+the negative witness mean, and $1-10^6q\ge1/2$.
+This proves the cubic assertion and its sharper coefficient on
+$U(q)$.
+\end{proof}
+
+\section{A regular graph for comparison}\label{sec:lower}
+
+We construct a comparison graph at every order needed in the proof.  The
+girth condition determines the boundaries of small connected sets, while
+expansion controls the remaining sets.  Throughout this section, put
+$X=100d$ and $g=500$.
+
+\begin{lemma}\label{lem:benchmark}
+Let $d\ge3$, let $nd$ be even, and suppose that $n\ge X^{520}$.
+There is a connected simple $d$-regular graph $H$ on $n$ vertices with
+girth at least $g$ such that
+\begin{equation}\label{eq:benchmark-cut}
+ |\partial_H S|\ge \frac d{100}|S|
+ \qquad\left(g\le |S|\le \frac n2\right).
+\end{equation}
+In particular, with $h=d/100$, we have $hg=5d\ge2d+1$.
+\end{lemma}
+
+\begin{proof}
+Consider a uniformly chosen pairing $M$ of the $T=nd$ half-edges in
+the configuration model.  Forbid every specified cycle of length
+$j<g$, where lengths one and two mean a loop and a pair of parallel
+edges, respectively.  A forbidden event $C$ prescribes $j$ pairs;
+write $p_C=\Pr(C)$ and $x_C=2p_C$.  The expected number of specified
+cycles of length $j$ is at most $(2d)^j$.  Indeed, there are at most
+$n^j d^{2j}$ oriented descriptions, and a prescribed set of $j$
+disjoint pairs occurs with probability at most $(T-2g)^{-j}$.
+By symmetry, the sum of the $x_C$ over events using a given
+half-edge is at most
+\begin{equation}\label{eq:cycle-weight}
+ \theta=\frac{4g^2(2d)^g}{T}.
+\end{equation}
+The hypothesis on $n$ implies that $\theta<10^{-7}$,
+$\exp(4g\theta)<2$, and $x_C<1/2$ for every $C$.
+
+Let $\mathcal G$ be the event that none of the forbidden cycles
+occurs.  The matching form of the lopsided local lemma gives
+\begin{equation}\label{eq:matching-conditioning}
+ \Pr(\mathcal G)>0,
+ \qquad
+ \Pr(F\subseteq M\mid\mathcal G)
+ \le e^{2t\theta}\Pr(F\subseteq M)
+\end{equation}
+for every matching $F$ specified on $t$ half-edges.  We verify the
+conditioning bound, since it will allow us to impose expansion
+without losing the girth condition.  By Theorem~3 of Lu and
+Sz\'ekely~\cite{LS}, the conflict graph of canonical matching events
+is a negative dependency graph.  We may enlarge it by joining events
+that share any half-edge.  A forbidden cycle uses at most $2g$
+half-edges, so the product of $(1-x_C)^{-1}$ over its neighbors is at
+most $\exp(4g\theta)<2$.  Thus the local lemma applies with the
+parameters $x_C$, and its induction gives
+$\Pr(C\mid\text{avoid any other subfamily})\le x_C$.
+Append the canonical event specifying $F$.  Conditioning on its
+nonneighbors does not increase its probability.  Conditioning
+subsequently on avoidance of its neighbors costs at most the product
+of their $(1-x_C)^{-1}$, which is at most $\exp(2t\theta)$.
+This proves~\eqref{eq:matching-conditioning}; no local-lemma parameter
+is needed for the appended event.
+
+We next estimate sparse cuts conditional on $\mathcal G$.  Fix
+$s\in[g,n/2]$, and put $x=s/n$ and $l=ds$.  Write
+$\mathcal H(x)=-x\log x-(1-x)\log(1-x)$ for the binary entropy.
+A cut of size at most $l/100$ leaves a subset of $l'\ge0.99l$
+half-edges paired internally, after choosing which at most $l/100$
+half-edges to omit.  There are at most
+$\exp\{l\mathcal H(0.01)\}$ such choices.  For even $l'$, the
+probability that a prescribed subset is paired internally is
+\begin{equation}\label{eq:internal-pairing}
+ \frac{\binom{T/2}{l'/2}}{\binom{T}{l'}}
+ \le (T+1)\exp\{-T\mathcal H(l'/T)/2\};
+\end{equation}
+for odd $l'$ it is zero.  The event in~\eqref{eq:internal-pairing}
+is a disjoint union of prescribed matchings on $l'$ half-edges.
+Its conditional probability is therefore at most $e^{2l\theta}$
+times its unconditional probability, by
+\eqref{eq:matching-conditioning}.
+
+Since $0.99x\le l'/T\le x\le1/2$, concavity and monotonicity give
+$\mathcal H(l'/T)\ge0.99\mathcal H(x)$.  There are at most
+$e^{n\mathcal H(x)}$ choices of the vertex set.  Using
+$x\le\mathcal H(x)/\log2$, $2\theta<0.001$, and
+\[
+ \frac13-0.495+
+ \frac{\mathcal H(0.01)+0.001}{\log2}< -\frac1{16},
+\]
+we obtain the bound
+$(T+1)\exp\{-dn\mathcal H(s/n)/16\}$ for the conditional
+probability of a sparse cut with a shore of order $s$.
+For $s\le\sqrt n$, use
+$n\mathcal H(s/n)\ge(s/2)\log n$; for $s>\sqrt n$, use
+$n\mathcal H(s/n)\ge\sqrt n\log2$.  Summing over $s$ gives at most
+\[
+ (T+1)\sqrt n\,n^{-dg/32}
+ +n(T+1)\exp\{-d\sqrt n\log2/16\}<1.
+\]
+The last inequality follows from $n\ge X^{520}$ and $d\ge3$.
+Hence some pairing has both the required girth and
+\eqref{eq:benchmark-cut}.  Avoidance of cycles of lengths one and
+two makes its graph simple.  Finally, a component of order less than
+$g$ would induce a forest, which cannot be $d$-regular for $d\ge3$;
+a component with order between $g$ and $n/2$ contradicts
+\eqref{eq:benchmark-cut}.  The graph is connected.
+\end{proof}
+
+We first establish the local part of the lower bound independently
+of the construction.  Let $H$ be a simple triangle-free $d$-regular
+graph.  Index the events that a vertex is isolated and that the two
+ends of an edge form a component with that edge surviving.  When
+$d=3$, also index the events that the vertices of a two-edge path
+form a component with both path edges surviving.  Paths are counted
+up to reversal.  Let $Z_H(q)$ denote the probability of avoiding
+this family.  The respective numbers of events are $n$, $m=dn/2$,
+and, in the cubic case, $3n$, and their probabilities are
+$q^d$, $(1-q)q^{2d-2}$, and $(1-q)^2q^5$.
+
+\begin{lemma}\label{lem:local-lower}
+For a simple triangle-free $d$-regular graph $H$,
+\begin{equation}\label{eq:lowerlog}
+ \log Z_H(q)\ge \Phi(q)-10^4d^6nq^{2d}
+ \qquad(0<q\le X^{-30}).
+\end{equation}
+If $d=3$, then the stronger numerical estimate
+$\log Z_H(q)\ge\Phi(q)-10^5nq^6$ holds throughout
+$0<q\le10^{-10}$.
+\end{lemma}
+
+\begin{proof}
+The maximum event probability is at most $q^d$.  Each coordinate
+occurs in at most $4d^2$ events, each event specifies at most $5d$
+coordinates, and the family has at most $2dn$ members.  Thus its
+dependency degree is at most $D=20d^3$.  We apply the conditional
+estimate~\eqref{eq:conditional}, ordering all the singleton stars
+first.
+
+Consider a star $A_i$, and split the earlier stars into its
+neighbors $J$ and the remaining set $B$.  For $j\in J$,
+$\Pr(A_i\cap A_j)=q^{2d-1}$.  Any three distinct stars require at
+least $3d-3\ge2d$ failed edges.  To estimate
+$F=A_i\cap A_j$ conditional on $\avo_B$, separate from $B$ the
+at most $2d$ stars whose supports meet that of $F$.  Avoidance of
+the other stars is independent of $F$.  Subtracting the relevant
+triple intersections, each of which has conditional probability at
+most $2q^{2d}$ by~\eqref{eq:conditional}, yields
+\[
+ \Pr(A_i\cap A_j\mid\avo_B)
+ \ge q^{2d-1}-4dq^{2d}.
+\]
+Here the conditional probability of avoiding the separated stars
+appears as a denominator at most one, so omitting it preserves the
+lower bound.
+
+Bonferroni's inequality now gives
+\[
+ \Pr(A_i\cap\avo_J\mid\avo_B)
+ \le q^d-|J|q^{2d-1}+5d^2q^{2d}.
+\]
+Indeed, $A_i$ is independent of $\avo_B$, and the positive
+Bonferroni terms contain three stars.  The conditional multiplier
+for each such intersection is at most
+$(1-2q^d)^{-3(D+1)}\le2$.  Also
+$\Pr(\avo_J\mid\avo_B)\ge1-2dq^d$.  Consequently, if $a_i$
+is the probability of $A_i$ conditional on avoidance of all
+earlier events, then
+\[
+ a_i\le q^d-|J|q^{2d-1}+10d^2q^{2d}.
+\]
+For every subsequent component event, the same conditional estimate
+gives $a_i\le p_i(1+400d^3q^d)$, where $p_i$ is its
+unconditional probability.
+
+Each edge is counted once in $\sum_i|J_i|$.  Summing the last
+bounds and using $\log(1-a_i)\ge-a_i-2a_i^2$ gives
+\[
+ \log Z_H(q)
+ \ge-\sum_i p_i+mq^{2d-1}-10^4d^6nq^{2d}.
+\]
+For example, the star errors are at most $10d^2nq^{2d}$,
+the later-event errors are at most $400d^4nq^{2d}$, and the
+quadratic logarithm errors are at most $16dnq^{2d}$.  Substituting
+the three event counts identifies the main terms with $\Phi(q)$
+and proves~\eqref{eq:lowerlog}.
+
+For the stated cubic range, each coordinate occurs in at most
+$26$ events and every event has at most eight coordinates, so
+$D\le208$ suffices.  A star has at most three neighboring stars,
+and a pair of stars has at most six.  The preceding Bonferroni
+calculation then contributes less than $100q^6$ per star.  The
+conditional multiplier for the later events is at most
+$1+2000q^3$, while their total probability is at most $2nq^4$.
+The quadratic logarithm terms contribute less than $30nq^6$.
+These estimates hold for $q\le10^{-10}$ and their sum is less
+than $10^5nq^6$.
+\end{proof}
+
+For later use, write $\mathcal N$ for the event that there are no
+isolated vertices in a simple cubic graph.  Applying
+\eqref{eq:void} to its stars alone gives
+\begin{equation}\label{eq:lower-harris}
+ \Pr(\mathcal N)
+ \le\exp\{-nq^3+2nq^5\}
+ \le\exp\{-nq^3/2\}
+ \qquad(0<q\le10^{-10}).
+\end{equation}
+If $F$ is increasing in the failed-edge indicators, Harris's
+inequality~\cite{Harris} gives
+$\Pr(F\cap\mathcal N)\le\Pr(F)\Pr(\mathcal N)$, since
+$\mathcal N$ is decreasing.  Thus a bound for fully failed cuts
+can be combined with~\eqref{eq:lower-harris} without an
+independence assumption.
+
+\begin{lemma}\label{lem:lower}
+Let $H$ be the graph in Lemma~\ref{lem:benchmark}, and put
+$A=X^{30}$.  If $0<q\le X^{-30}$ and $q^d\le X^{-500}$, then
+\begin{equation}\label{eq:lower}
+ R_H(q)\ge
+ \exp\{\Phi(q)-Anq^{2d}\}-Anq^{2d}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{lem:local-lower} gives the required lower estimate for
+$Z_H(q)$.  It remains to bound the probability that the surviving
+graph is disconnected despite avoiding the indexed events.  In
+that case some component has order $s_0\le s\le n/2$, where
+$s_0=4$ for $d=3$ and $s_0=3$ otherwise.  Its vertex set is
+connected in $H$, and its entire boundary has failed.
+
+The number of connected vertex sets of order $s$ is at most
+$nd^{2(s-1)}$: choose a spanning tree and record a rooted traversal
+of length $2(s-1)$.  For $s<g$, the girth condition makes the
+induced connected graph a tree, whose boundary has size
+$(d-2)s+2$.  Since $d^2q^{d-2}\le1/2$, the union bound over
+these sizes is at most $2nd^6q^{2d}$.
+
+For $s\ge g$, use~\eqref{eq:benchmark-cut}.  The additional
+condition on $q$ implies $d^2q^{d/200}\le1/2$, and hence
+\[
+ n\sum_{s\ge500}d^{2s}q^{ds/100}
+ \le n q^{500d/200}\sum_{s\ge500}2^{-s}
+ \le nq^{2d}.
+\]
+Subtracting these probabilities from $Z_H(q)$ proves
+\eqref{eq:lower}, because both $10^4d^6$ and $2d^6+1$ are
+smaller than $A$.
+\end{proof}
+
+\section{Extremal regularity and the maximum average reliability}
+\label{sec:extrema}
+
+We first integrate the local estimates with constants uniform in $d$.
+Put $X=100d$, $A=X^{30}$ and
+$n_0=X^{\max\{520,40d\}}$, and suppose that $n\ge n_0$ and $nd$ is even.
+Let $H=H_n$ be the graph supplied by Lemma~\ref{lem:benchmark}.
+For a connected competitor $G$, retain the notation
+$U(q)=\sum_{j<d}n_jq^j$ of Lemma~\ref{lem:upper}, and write
+\begin{equation}\label{eq:cutoff-integral}
+ Q=\left(\frac{8\log n}{n}\right)^{1/d},
+ \qquad I_n=\int_0^Q e^{\Phi(q)}\,dq,
+\end{equation}
+where $\Phi$ is defined in~\eqref{eq:phi}.
+At $n=n_0$ we have $8\log n_0\le X^2$. Consequently
+$Q\le X^{-30}$ and $Q^d\le X^{-518}$; both bounds persist as $n$ increases.
+Thus Lemmas~\ref{lem:upper} and~\ref{lem:lower} apply throughout $[0,Q]$.
+Also $AnQ^{2d}<1$, and direct substitution in~\eqref{eq:phi} gives
+$\Phi(q)+Anq^{2d}\le-nq^d/2$ on this interval.
+Since reliability is decreasing in $q$,~\eqref{eq:upper} implies
+$\int_Q^1R_G(q)\,dq\le n^{-4}$.
+
+Applying $e^{-x}\ge1-x$ and $e^x\le1+2x$ for $0\le x\le1$ to
+\eqref{eq:upper} and~\eqref{eq:lower}, we obtain
+\begin{align}
+ \AR(H)&\ge I_n-2AnQ^{2d+1},\label{eq:benchmark-integrated}\\
+ \AR(G)&\le I_n-\int_0^Q e^{\Phi(q)}
+                 (1-e^{-U(q)/2})\,dq
+                 +2AnQ^{2d+1}+n^{-4}.\label{eq:competitor-integrated}
+\end{align}
+If $G$ is nonregular, the degree sum forces at least one vertex of degree
+less than $d$, so $U(q)\ge q^{d-1}$. On the interval $1\le nq^d\le2$,
+which lies in $[0,Q]$, we have $\Phi(q)\ge-3$ and
+$1-e^{-U(q)/2}\ge q^{d-1}/4$. Hence
+\begin{equation}\label{eq:defect-window}
+ \int_0^Qe^{\Phi(q)}(1-e^{-U(q)/2})\,dq
+ \ge \frac{e^{-3}}4
+       \int_{n^{-1/d}}^{(2/n)^{1/d}}q^{d-1}\,dq
+ =\frac{e^{-3}}{4dn}.
+\end{equation}
+The errors in~\eqref{eq:benchmark-integrated} and
+\eqref{eq:competitor-integrated} sum to at most
+$4AnQ^{2d+1}+n^{-4}$. At $n=n_0$, their first term multiplied by $n$ is
+\[
+ 4X^{30}n_0^{-1/d}(8\log n_0)^{2+1/d}\le4X^{-5}.
+\]
+This expression decreases for $n\ge n_0$, since $\log n_0>2d+1$.
+Together with the tail, it is less than $e^{-3}/(8d)$.
+Subtracting~\eqref{eq:competitor-integrated} from
+\eqref{eq:benchmark-integrated} proves
+$\AR(H)-\AR(G)\ge e^{-3}/(8dn)$.
+A disconnected competitor has average reliability zero, and the same
+conclusion follows directly from~\eqref{eq:lower} on $1\le nq^d\le2$.
+This proves the general bound in Theorem~\ref{thm:main}. The separate cubic bound is proved in Appendix~\ref{sec:cubic}.
+
+We now fix $d$ and evaluate the maximum to the precision asserted in
+Theorem~\ref{thm:exp}. Let $M_d(n)$ denote that maximum, in either of the
+two graph classes. The errors in~\eqref{eq:benchmark-integrated} and
+\eqref{eq:competitor-integrated} are
+$O_d(n^{-1-1/d}(\log n)^{2+1/d})=o_d(n^{-1})$.
+Dropping the nonnegative integral in the latter estimate yields
+\begin{equation}\label{eq:maximum-integral}
+ M_d(n)=I_n+o_d(n^{-1}),
+ \qquad M_d(n)-\AR(H_n)=o_d(n^{-1}).
+\end{equation}
+We use the elementary identity
+\begin{equation}\label{eq:gamma-moment}
+ \int_0^\infty q^s e^{-nq^d}\,dq
+ =\frac{\Gamma((s+1)/d)}{d\,n^{(s+1)/d}}
+ \qquad(s>-1).
+\end{equation}
+For each fixed moment used below, extending the integral from $Q$ to
+infinity changes the result by $o_d(n^{-1})$, since $nQ^d=8\log n$.
+
+If $d\ge4$, then
+$\Phi(q)=-nq^d-mq^{2d-2}+2mq^{2d-1}$, where $m=dn/2$.
+The last two terms are uniformly $o(1)$ on $[0,Q]$.
+Their quadratic remainder under integration is
+$O_d(n^{-(2d-3)/d})=o(n^{-1})$ by~\eqref{eq:gamma-moment}.
+The constant term, the term $-mq^{2d-2}$ and the term $2mq^{2d-1}$
+therefore give, respectively,
+\[
+ I_n=\Gamma(1+1/d)n^{-1/d}
+     -\frac12\Gamma(2-1/d)n^{-(d-1)/d}
+     +\frac1n+o_d(n^{-1}).
+\]
+For $d=3$, the coefficient of $q^5$ in~\eqref{eq:phi} cancels, leaving
+$\Phi(q)=-nq^3-\frac32nq^4+O(nq^6)$.
+The error $nq^6$ has integral $O(n^{-4/3})$ against $e^{-nq^3}$.
+The linear correction gives $-\frac12\Gamma(5/3)n^{-2/3}$, while the
+quadratic correction gives
+$\frac98n^2\int_0^\infty q^8e^{-nq^3}\,dq=3/(4n)$.
+The cubic remainder has integral $O(n^{-4/3})$.
+Together with~\eqref{eq:maximum-integral}, these computations prove
+Theorem~\ref{thm:exp}.
+
+\section{The loss caused by a degree defect}
+\label{sec:defect}
+
+We prove Theorem~\ref{thm:gap}. Throughout this section $d$ is fixed,
+and $n$ tends to infinity through admissible orders.
+Keeping the terms charged to $U(q)$ in the proof of
+Lemma~\ref{lem:upper} gives the sharper estimate
+\begin{equation}\label{eq:upper-sharp-defect}
+ R_G(q)\le
+ \exp\{\Phi(q)+C_dnq^{2d}-(1-C_dq)U(q)\}
+ \qquad(0<q\le a_d).
+\end{equation}
+Indeed, every positive term charged to the low-degree vertices is
+$O_d(qU(q))$; the terms charged to exceptional patterns are absorbed
+separately by their witness events.
+
+Suppose that $U(q)\ge kq^{d-1}$ on $[0,Q]$, where $k\in\{1,2\}$.
+Integrating~\eqref{eq:upper-sharp-defect} as above,
+and using $\Phi(q)+nq^d=o(1)$ uniformly on $[0,Q]$, gives
+\begin{equation}\label{eq:k-defects}
+ \AR(G)\le I_n-\frac{k}{dn}+o_d(n^{-1}).
+\end{equation}
+Here the error is uniform over such competitors: the loss is bounded
+below by the integral with $U(q)$ replaced by $kq^{d-1}$, and
+$1-e^{-(1-C_dq)kq^{d-1}}=(1+o(1))kq^{d-1}$ uniformly on $[0,Q]$.
+The corresponding moment in~\eqref{eq:gamma-moment} is $1/(dn)$.
+Every connected nonregular graph satisfies this estimate with $k=1$;
+disconnected graphs do not affect the maximum for large $n$.
+By~\eqref{eq:maximum-integral}, this proves the required lower bound
+on the loss of the best nonregular graph.
+
+For the matching bound, start with the comparison graph $H=H_n$.
+Write $g=500$ and $h=d/100$, so that $hg\ge2d+1$.
+Choose an edge $uv$ and a vertex $w$ with
+$\operatorname{dist}_H(u,w)>g$, and put
+$K=H-uv$ and $G'=K+uw$.
+Such a vertex exists for all sufficiently large $n$, since $d$ and $g$
+are fixed. The graph $G'$ is simple; its vertices $v,w$ have degrees
+$d-1,d+1$, respectively, and every other vertex has degree $d$.
+
+Couple the states of $uv$ and $uw$, and use the same states for all
+edges of $K$. If the surviving subgraph of $H$ is connected whereas
+that of $G'$ is disconnected, the coupled edge is present and the
+surviving subgraph of $K$ has exactly two components. One contains $v$,
+and the other contains both $u$ and $w$.
+Choose the smaller component, breaking ties arbitrarily.
+
+If this component is a singleton, it must be $\{v\}$, and all $d-1$
+edges incident with $v$ in $K$ have failed. Every vertex outside the
+closed neighborhoods of $u,v,w$ in $H$ must nevertheless be nonisolated.
+The coordinates of these $n-O_d(1)$ vertex stars are disjoint from
+the edges just forced to fail. The star-event estimate used in
+Lemma~\ref{lem:upper} therefore bounds this case by
+\begin{equation}\label{eq:singleton-transfer}
+ q^{d-1}\exp\{-(n-O_d(1))q^d+O_d(nq^{2d-1})\}.
+\end{equation}
+
+If the chosen component has order $2\le s<g$, it contains $v$:
+a connected set of this order cannot contain both $u$ and $w$.
+There are at most $d^{2(s-1)}$ connected sets of order $s$ containing
+$v$, by recording a traversal of a spanning tree.
+Each induces a tree in $H$ and has $(d-2)s+1$ boundary edges in $K$.
+The sum of their probabilities is consequently $O_d(q^{2d-3})$.
+For $g\le s\le n/2$, expansion gives at least $hs-1$ boundary edges
+in $K$. Counting connected sets in $H$ bounds their total probability
+by
+$n\sum_{s\ge g}d^{2(s-1)}q^{hs-1}=O_d(nq^{hg-1})
+=O_d(nq^{2d})$ for sufficiently small $q$.
+
+Integrate these bounds up to $Q$. In~\eqref{eq:singleton-transfer}
+the exponent differs from $-nq^d$ by $o(1)$ uniformly, so its integral
+is $1/(dn)+o_d(n^{-1})$.
+The other cases contribute
+$O_d(Q^{2d-2}+nQ^{2d+1})=o_d(n^{-1})$.
+Above $Q$, the integral of $R_H$ is at most $n^{-4}$.
+The coupling therefore proves
+$\AR(H)-\AR(G')\le1/(dn)+o_d(n^{-1})$.
+Using~\eqref{eq:maximum-integral} again establishes the asserted sharp
+loss in both graph classes, since $G'$ is simple.
+
+Finally, a graph with at least two vertices of degree below $d$
+satisfies~\eqref{eq:k-defects} with $k=2$.
+The same is true if one vertex has degree at most $d-2$, because
+$q^{d-2}\ge2q^{d-1}$ on $[0,Q]$ for large $n$.
+Both possibilities give strictly smaller average reliability than $G'$.
+Thus every maximizing nonregular graph has exactly one vertex of degree
+$d-1$ and no other vertex of degree below $d$.
+Its total degree excess is one, forcing exactly one vertex of degree
+$d+1$ and all remaining vertices to have degree $d$.
+This completes the proof of Theorem~\ref{thm:gap}.
+
+\subsection*{Further questions}
+For $d\ge3$, the regularity conjecture of Brown, Kolokolnikov and Kooij remains open for the admissible orders below our thresholds in general. Even in the range where every maximizer is regular, it remains to determine which regular graphs attain $M_d(n)$. The three terms in Theorem~\ref{thm:exp} do not distinguish all such candidates.
+
+\appendix
+
+\section{The cubic case}\label{sec:cubic}
+
+We prove the cubic assertion of Theorem~\ref{thm:main}. A graph of
+average degree three has even order, so write $n=2N$. Our comparison
+graph is the generalized Petersen graph $P_N=GP(N,4)$, with vertices
+$u_i,v_i$, indexed by $\mathbb Z/N\mathbb Z$, and edges
+$u_iu_{i+1}$, $v_iv_{i+4}$ and $u_iv_i$. Throughout this section
+$n\ge10^{33}$. In particular, $P_N$ is a connected simple cubic graph
+of girth at least seven. Indeed, a cycle of length at most six has
+index displacement of absolute value at most $24<N$ and hence lifts
+to the graph with the same edge types on integer indices. A cycle
+in this infinite graph has an even number of spokes. Two spokes
+require at least four outer edges and one inner edge, while four or
+more spokes require at least four further edges.
+
+We first count the cuts that are not detected by components of order
+at most three. A \emph{bond} is an edge cut minimal under inclusion;
+its two induced shores are connected. We call a bond \emph{nontrivial}
+in this section if both shores have at least four vertices.
+
+\begin{lemma}\label{lem:cubic-bonds}
+The nontrivial bonds of $P_N$ can be divided into two classes with
+the following bounds:
+\begin{enumerate}
+\item The first class has no bond of size less than six, at most
+$729n$ bonds of size six, and at most $N400^k$ bonds of size $k$ for
+each $k\ge7$.
+\item The second class has no bond of size less than ten, at most
+$N^2$ bonds of size ten, and at most $N^2 400^k$ bonds of size $k$ for
+each $k\ge11$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For a bond $F$ of size $k$, mark the columns containing endpoints of
+its edges, enlarge the marked set by cyclic distance four, and merge
+marked intervals across gaps of fewer than four columns. There are
+at most $2k$ initial marks. Their enlargements cover at most $18k$
+columns, and merging adds at most $6k$ further columns. Thus the
+resulting intervals cover at most $24k$ columns, unless they cover
+the whole cycle, in which case $N\le24k$.
+
+Color each vertex according to its shore. Every remaining gap is
+monochromatic: no spoke or outer edge within the gap belongs to
+$F$. Such a gap has at least four columns, so no edge of the graph
+can pass from one side of it to the other without meeting the gap.
+Every marked interval contains both colors, since it contains an
+edge of $F$ together with its endpoints. There are at most two marked
+intervals. Otherwise two gaps have the same color, and each of the
+two arcs between them contains vertices of the other color,
+contradicting connectedness of that shore. When there are two marked
+intervals, the two gaps have opposite colors, by the same argument.
+The first class consists of bonds with one marked interval, including
+full coverage, and the second of those with two.
+
+Consider an interval in the second class, together with four columns
+from each adjacent gap. Unwrap this strip into integer indices.
+The outer path and the four inner paths of step four give five
+edge-disjoint paths between its oppositely colored ends. Each path
+contains a cut edge in the marked interval. Thus each interval
+contains at least five edges of $F$, and $k\ge10$. This argument
+does not require $4\mid N$. If $k=10$, these ten edges exhaust the
+cut. Consequently no spoke crosses the cut, and the outer cycle has
+exactly two crossing edges. Their positions determine the bond,
+giving at most $N^2$ possibilities.
+
+For a bond in the first class with $k\le6$, there is a gap because
+$N>144$. The shore $S$ opposite the gap embeds in the infinite graph
+on integer indices, with its boundary unchanged. This graph consists
+of five disjoint doubly infinite paths---the outer path and the four
+inner residue paths---joined by spokes. Let $r$ be the total number
+of occupied intervals on these paths, and let $a$ be the number of
+columns containing exactly one vertex of $S$. Then
+\begin{equation}\label{eq:cubic-boundary-runs}
+ |\partial S|=2r+a.
+\end{equation}
+Suppose that $|\partial S|\le6$. If $S$ meets only one path,
+connectedness gives $|\partial S|=2+|S|$, so $|S|\le4$.
+If it meets two paths, they must be the outer path and one inner
+residue path. For $r=2$, each is occupied in one interval and
+$a\le2$. Two doubly occupied columns would force at least three
+unpaired outer vertices between them. Hence there is at most one
+doubly occupied column, and $|S|\le2+a\le4$. For $r=3$, equation
+\eqref{eq:cubic-boundary-runs} forces $a=0$. All occupied indices
+then lie in one residue class modulo four, and every occupied outer
+vertex forms a separate interval. There are at most two such outer
+intervals, again giving $|S|\le4$.
+
+If $S$ meets three paths, then $r=3$ and $a=0$. The paths must be
+the outer path and two inner residue paths. Its single outer interval
+uses only two residue classes and therefore has length at most two;
+thus $|S|\le4$. Four occupied paths are impossible. We have proved
+that $|S|\le4$ in every case. Since the bond is nontrivial, $|S|=4$;
+the girth condition makes $P_N[S]$ a tree, so its boundary has size
+six. A connected set of four vertices is visited by a spanning-tree
+walk of length six. There are at most $n3^6=729n$ such walks, proving
+the asserted count at size six.
+
+It remains to count larger bonds. One or two cyclic windows of length
+$24k$ cover the marked intervals. The initial columns have at most
+$N$ or $N^2$ choices. Their union contains at most $72k$ or $144k$
+edges: charge each edge to its initial column in the list of the
+three edge types defining $P_N$. Thus the respective counts are at
+most $N\binom{72k}{k}$ and $N^2\binom{144k}{k}$. Both required bounds
+follow from $\binom{144k}{k}\le(144e)^k<400^k$. If the marked interval
+covers the whole cycle, then $N\le24k$ and the same one-window bound
+applies.
+\end{proof}
+
+We now compare $P_N$ with a connected nonregular loopless multigraph
+$G$ of order $n$ and average degree three. Let $n_j$ count the vertices
+of $G$ of degree $j$, and put $U(q)=n_1q+n_2q^2$. In the notation
+of Lemmas~\ref{lem:upper} and~\ref{lem:local-lower}, the common exponent is
+\begin{equation}\label{eq:cubic-phi}
+ \Phi(q)=-nq^3-\frac{3n}{2}(1-q)q^4
+       +\frac{3n}{2}q^5-3n(1-q)^2q^5
+       =-nq^3-\frac{3n}{2}q^4+6nq^6-3nq^7.
+\end{equation}
+Use their cubic constants $A=10^5$ and $q\le10^{-10}$. The upper
+estimate gives
+\begin{equation}\label{eq:cubic-upper}
+ R_G(q)\le \exp\{\Phi(q)+Anq^6-U(q)/2\}.
+\end{equation}
+Let $\mathcal A$ be the event that percolation on $P_N$ produces no
+component of order at most three. The local lower estimate gives
+$\Pr(\mathcal A)\ge\exp\{\Phi(q)-Anq^6\}$. Here every connected
+set of three vertices induces a path, so the local events in
+Lemma~\ref{lem:local-lower} are precisely the events excluded by
+$\mathcal A$.
+
+Let $\mathcal N$ denote the event that there are no isolated vertices. By~\eqref{eq:lower-harris} and Harris's inequality, for each bond $F$ the probability that every edge of $F$ fails and $\mathcal N$ occurs is at most $q^{|F|}e^{-nq^3/2}$. If the percolated
+graph is disconnected on $\mathcal A$, some bond is entirely failed.
+Neither shore of such a bond can have at most three vertices, since
+that shore would contain a surviving component of order at most
+three. Lemma~\ref{lem:cubic-bonds}, a union bound, and geometric
+summation now give
+\begin{align}
+ R_{P_N}(q)&\ge \exp\{\Phi(q)-Anq^6\}-E(q),
+       \label{eq:cubic-lower}\\
+ E(q)&=e^{-nq^3/2}\bigl(729nq^6+2N(400q)^7
+                    +N^2q^{10}+2N^2(400q)^{11}\bigr).
+       \label{eq:cubic-error}
+\end{align}
+The factors two are valid since $400q<1/2$.
+
+Set $Q=(8\log n/n)^{1/3}$. For $n\ge10^{33}$, we have
+$Q<8.5\cdot10^{-11}$, and $\Phi(q)+Anq^6\le-nq^3/2$ for
+$0\le q\le Q$. Since reliability decreases with $q$,
+\eqref{eq:cubic-upper} gives
+\begin{equation}\label{eq:cubic-tail}
+ \int_Q^1 R_G(q)\,dq\le R_G(Q)\le n^{-4}.
+\end{equation}
+The mean value theorem bounds the two errors caused by $\pm Anq^6$
+in \eqref{eq:cubic-upper} and~\eqref{eq:cubic-lower}, together, by
+$10^6nq^6e^{-nq^3/2}$. Thus
+\begin{equation}\label{eq:cubic-comparison}
+ \AR(P_N)-\AR(G)
+ \ge \int_0^Q e^{\Phi(q)}(1-e^{-U(q)/2})\,dq-\mathcal E_n,
+\end{equation}
+where
+\begin{equation}\label{eq:cubic-integrated-error}
+ \mathcal E_n\le
+ \int_0^Q\bigl(10^6nq^6e^{-nq^3/2}+E(q)\bigr)\,dq+n^{-4}.
+\end{equation}
+
+For $s\ge0$, put
+$J_s=2^{(s+1)/3}\Gamma((s+1)/3)/3$. The change of variables
+$t=nq^3/2$ yields
+$\int_0^\infty q^s e^{-nq^3/2}\,dq=J_sn^{-(s+1)/3}$.
+Using $N=n/2$ in \eqref{eq:cubic-integrated-error} and rounding the
+coefficients upward, we obtain
+\begin{align}\label{eq:cubic-numerical-error}
+ n\mathcal E_n\le{}&
+ (10^6+1458)J_6n^{-1/3}
+ +2\cdot401^7J_7n^{-2/3}
+ +2J_{10}n^{-2/3}\notag\\
+ &\quad+2\cdot401^{11}J_{11}n^{-1}+n^{-3}
+ <0.005.
+\end{align}
+For completeness, log-convexity of the Gamma function between
+successive integer arguments gives $J_6<3$, $J_7<4$ and $J_{10}<20$,
+while $J_{11}=32$. Substitution of these bounds at $n=10^{33}$ makes
+the right-hand side of \eqref{eq:cubic-numerical-error} less than
+$0.004123$, and every term decreases with $n$.
+
+Finally, connectedness and nonregularity of $G$ imply $n_1+n_2\ge1$,
+so $U(q)\ge q^2$ for $0\le q\le1$. On the interval
+$[n^{-1/3}/2,n^{-1/3}]\subseteq[0,Q]$, equation
+\eqref{eq:cubic-phi} gives $e^{\Phi(q)}\ge1/4$, and
+$1-e^{-U(q)/2}\ge q^2/4$. Hence the integral in
+\eqref{eq:cubic-comparison} is at least
+\begin{equation}\label{eq:cubic-gap}
+ \frac1{16}\int_{n^{-1/3}/2}^{n^{-1/3}}q^2\,dq
+ =\frac7{384n}>\frac{0.018}{n}.
+\end{equation}
+Combining \eqref{eq:cubic-comparison}, \eqref{eq:cubic-numerical-error}
+and~\eqref{eq:cubic-gap} proves $\AR(P_N)>\AR(G)$. Disconnected
+competitors have average reliability zero. This proves the cubic
+assertion of Theorem~\ref{thm:main}, for simple graphs and for
+loopless multigraphs.
+
+\begin{thebibliography}{9}
+
+\bibitem{BCHB}
+R. Brand, R. Cohen, S. Haber and B. Barzel,
+\emph{On the most reliable graphs with fixed redundancy},
+\href{https://arxiv.org/abs/2603.01256}{arXiv:2603.01256} (2026).
+
+\bibitem{BCE}
+J. I. Brown, D. Cox and R. Ehrenborg,
+\href{https://doi.org/10.1016/j.dam.2014.05.048}{\emph{The average reliability of a graph}},
+Discrete Appl. Math. \textbf{177} (2014), 19--33.
+
+\bibitem{BKK}
+J. I. Brown, T. Kolokolnikov and R. E. Kooij,
+\href{https://doi.org/10.1002/net.22215}{\emph{New approximations for network reliability}},
+Networks \textbf{84} (2024), no.~1, 51--63.
+
+\bibitem{Harris}
+T. E. Harris,
+\href{https://doi.org/10.1017/S0305004100034241}{\emph{A lower bound for the critical probability in a certain percolation process}},
+Proc. Cambridge Philos. Soc. \textbf{56} (1960), 13--20.
+
+\bibitem{LS}
+L. Lu and L. A. Sz\'ekely,
+\emph{A new asymptotic enumeration technique: the Lov\'asz Local Lemma},
+\href{https://arxiv.org/abs/0905.3983}{arXiv:0905.3983} (2009), revised 2014.
+
+\end{thebibliography}
+\end{document}
